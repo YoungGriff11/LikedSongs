@@ -15,6 +15,8 @@ public class LikedSongsApp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        LikedSongsGUI myGUI = new LikedSongsGUI();
+        myGUI.setVisible(true);
     }
     
 }
