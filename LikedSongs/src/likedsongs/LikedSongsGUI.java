@@ -5,21 +5,29 @@
 package likedsongs;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import javax.swing.JOptionPane;
+
+
+
 
 /**
  *
  * @author conor
  */
 public class LikedSongsGUI extends javax.swing.JFrame {
-    private ArrayList<LikedSongs> songs; //creates new arraylists
+    //private ArrayList<LikedSongs> songs; //creates new arraylists
     /**
      * Creates new form LikedSongsGUI
      */
+    
+    private LikedSongsIF songs;
+    private LikedSongsIF2 genreA, genreB;
+    
     public LikedSongsGUI() {
         initComponents();
-        songs = new ArrayList<>();//declare new arraylists
+        LikedSongs ls = new LikedSongs();
+        Genre a = new Genre();
+        GenraB b = new GenreB();
+        
     }
 
     /**
@@ -46,6 +54,8 @@ public class LikedSongsGUI extends javax.swing.JFrame {
         popSongsTA = new javax.swing.JTextArea();
         genreLBL = new javax.swing.JLabel();
         genreTF = new javax.swing.JTextField();
+        dpBTN = new javax.swing.JButton();
+        repeatBTN = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -85,38 +95,49 @@ public class LikedSongsGUI extends javax.swing.JFrame {
 
         genreLBL.setText("Song genre");
 
+        dpBTN.setText("Display Playlists");
+
+        repeatBTN.setText("Repeat");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(addBTN)
-                        .addGap(18, 18, 18)
-                        .addComponent(searchBTN)
-                        .addGap(18, 18, 18)
-                        .addComponent(dltBTN)
-                        .addGap(18, 18, 18)
-                        .addComponent(moveBTN))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(enterLBL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(entryTF, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(genreLBL)
+                                .addComponent(addBTN)
                                 .addGap(18, 18, 18)
-                                .addComponent(genreTF, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(searchBTN)
+                                .addGap(18, 18, 18)
+                                .addComponent(dltBTN)
+                                .addGap(18, 18, 18)
+                                .addComponent(moveBTN))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(enterLBL)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(entryTF, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(genreLBL)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(genreTF, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(dpBTN)
+                        .addGap(70, 70, 70)
+                        .addComponent(repeatBTN)))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -139,7 +160,11 @@ public class LikedSongsGUI extends javax.swing.JFrame {
                     .addComponent(searchBTN)
                     .addComponent(dltBTN)
                     .addComponent(moveBTN))
-                .addGap(123, 123, 123))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dpBTN)
+                    .addComponent(repeatBTN))
+                .addGap(82, 82, 82))
         );
 
         pack();
@@ -147,16 +172,19 @@ public class LikedSongsGUI extends javax.swing.JFrame {
 
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
         // TODO add your handling code here: fix delete
-        LikedSongs ls = new LikedSongs();
+         
+        //LikedSongs ls = new LikedSongs();
         ls.name = entryTF.getText(); //add name of song to array
         ls.genre = genreTF.getText(); //add genre into array
-        songs.add(ls); // ads
+        //songs.add(ls); // ads
         likedSongsTA.append(entryTF.getText() + "\n");
+        
     }//GEN-LAST:event_addBTNActionPerformed
 
     private void dltBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dltBTNActionPerformed
         // TODO add your handling code here:
-        if(songs.isEmpty()){
+        
+        /*if(songs.isEmpty()){
            JOptionPane.showMessageDialog(null, "Sorry, There is currently no donations");
         }
         else{
@@ -173,6 +201,7 @@ public class LikedSongsGUI extends javax.swing.JFrame {
                 }
             
       }
+        */
     }//GEN-LAST:event_dltBTNActionPerformed
 
     /**
@@ -213,6 +242,7 @@ public class LikedSongsGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBTN;
     private javax.swing.JButton dltBTN;
+    private javax.swing.JButton dpBTN;
     private javax.swing.JLabel enterLBL;
     private javax.swing.JTextField entryTF;
     private javax.swing.JLabel genreLBL;
@@ -225,6 +255,7 @@ public class LikedSongsGUI extends javax.swing.JFrame {
     private javax.swing.JButton moveBTN;
     private javax.swing.JTextArea popSongsTA;
     private javax.swing.JTextArea rapSongsTA;
+    private javax.swing.JButton repeatBTN;
     private javax.swing.JButton searchBTN;
     // End of variables declaration//GEN-END:variables
 }
