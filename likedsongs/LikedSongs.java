@@ -14,6 +14,8 @@ import java.util.*;
 public class LikedSongs implements LikedSongsIF2 {
     
     public String name,genre;
+    
+    
 
     public String getName() {
         return name;
@@ -87,9 +89,9 @@ public class LikedSongs implements LikedSongsIF2 {
         int iCount;
         String sMessage = "";
         if (songs.isEmpty()) {
-            sMessage = sMessage.concat("The Stack is EMPTY!");
+            sMessage = sMessage.concat("The Playist is EMPTY!");
         } else {
-            sMessage = "The Stack contains: ";
+            sMessage = "The playlist contains: ";
             for (iCount = 0; iCount < songs.size(); iCount++) {
                 sMessage = sMessage.concat(songs.get(iCount));
                 sMessage = sMessage.concat("; ");
@@ -97,5 +99,5 @@ public class LikedSongs implements LikedSongsIF2 {
         }
         return sMessage;
     }
-
+   
 }

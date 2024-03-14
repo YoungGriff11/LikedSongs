@@ -4,6 +4,8 @@
  */
 package likedsongs;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author conor
@@ -13,14 +15,14 @@ public class LikedSongsGUI extends javax.swing.JFrame {
     /**
      * Creates new form LikedSongsGUI
      */
-    private LikedSongsIF2 songs;
+    LikedSongsIF2 songs;
     private LikedSongsIF genreA, genreB;
 
     public LikedSongsGUI() {
         initComponents();
-        LikedSongs ls = new LikedSongs();
-        Genre a = new Genre();
-        genreB b = new genreB();
+        songs = new LikedSongs();
+        genreA = new Genre();
+        genreB = new genreB();
 
     }
 
@@ -48,7 +50,8 @@ public class LikedSongsGUI extends javax.swing.JFrame {
         dltBTN = new javax.swing.JButton();
         moveBTN = new javax.swing.JButton();
         dspBTN = new javax.swing.JButton();
-        sffBTN = new javax.swing.JButton();
+        rpBTN = new javax.swing.JButton();
+        xitBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +85,11 @@ public class LikedSongsGUI extends javax.swing.JFrame {
         });
 
         searchBTN.setText("Search");
+        searchBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBTNActionPerformed(evt);
+            }
+        });
 
         dltBTN.setText("Delete");
         dltBTN.addActionListener(new java.awt.event.ActionListener() {
@@ -91,10 +99,32 @@ public class LikedSongsGUI extends javax.swing.JFrame {
         });
 
         moveBTN.setText("Move");
+        moveBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveBTNActionPerformed(evt);
+            }
+        });
 
         dspBTN.setText("Display");
+        dspBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dspBTNActionPerformed(evt);
+            }
+        });
 
-        sffBTN.setText("Shuffle");
+        rpBTN.setText("Repeat");
+        rpBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rpBTNActionPerformed(evt);
+            }
+        });
+
+        xitBTN.setText("Exit");
+        xitBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xitBTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,13 +155,17 @@ public class LikedSongsGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dltBTN)
-                    .addComponent(sffBTN))
+                    .addComponent(rpBTN))
                 .addGap(44, 44, 44))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(xitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addComponent(xitBTN)
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(entryLBL)
                     .addComponent(entryTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,7 +185,7 @@ public class LikedSongsGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(moveBTN)
                     .addComponent(dspBTN)
-                    .addComponent(sffBTN))
+                    .addComponent(rpBTN))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -164,28 +198,99 @@ public class LikedSongsGUI extends javax.swing.JFrame {
 
     private void dltBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dltBTNActionPerformed
         // TODO add your handling code here:
-        // Assuming songs is an ArrayList<String> or ArrayList<Object>
-// Initialize songs appropriately in your LikedSongsGUI class
 
-        /*if (this.songs == null || this.songs.isEmpty()) {
-            lkdSgTA.append("There are no wagons to be removed!\n");
-        } else {
-            String songsRemoved = this.songs.remove(this.songs.size() - 1);
-            lkdSgTA.append("The " + songsRemoved + " wagon was removed!\n");
+        /*if (songs == null) {
+            songs = new LikedSongs();
         }*/
+        if (songs.isEmpty()) {
+            lkdSgTA.append("There are no songs to be removed!\n");
+        } else {
+            String songsRemoved = (String) songs.pop();
+            lkdSgTA.append("The song " + songsRemoved + " was removed!\n");
+        }
 
+        if (genreA.isEmpty()) {
+            rapGnrTA.append("There are no songs to be removed!\n");
+        } else {
+            String songsRemoved = (String) genreA.dequeue();
+            rapGnrTA.append("The song " + songsRemoved + " was removed!\n");
+        }
 
+        if (genreB.isEmpty()) {
+            popGnrTA.append("There are no songs to be removed!\n");
+        } else {
+            String songsRemoved = (String) genreB.dequeue();
+            popGnrTA.append("The song " + songsRemoved + " was removed!\n");
+        }
     }//GEN-LAST:event_dltBTNActionPerformed
 
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
         // TODO add your handling code here:
-        String name, genre;
-        LikedSongs ls = new LikedSongs();
-
+        //This adds to liked Songs playlist not genreA/B
+        String name;
+        // Adding the song to the new instance of LikedSongs
         name = entryTF.getText();
-        ls.push(name);
-        lkdSgTA.append("The song " + name + " was added!\n");
+        songs.push(name);
+        lkdSgTA.append("The song " + name + " was added to the liked song playlist!\n");
     }//GEN-LAST:event_addBTNActionPerformed
+
+    private void moveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveBTNActionPerformed
+        // TODO add your handling code here:
+        //This will move songs from liked Songs to either genreA/B
+        // This will only move 1 song at a time, so if you add two songs 1 rap, 1 pop it will move both to one playlist, add 1 than move than add again
+        if (songs.isEmpty()) {
+            lkdSgTA.append("There are no songs to move!\n");
+        } else {
+            // Get the song to move
+            String songToMove = (String) songs.pop();
+
+            // Get the genre from the genreTF text field
+            String genre = genreTF.getText().trim().toLowerCase(); // Convert to lowercase for case-insensitive
+
+            // Check if the selected genre is rap or pop
+            if ("rap".equals(genre)) {
+                genreA.enqueue(songToMove);
+                rapGnrTA.append("The song '" + songToMove + "' was moved to rap playlist!\n");
+            } else if ("pop".equals(genre)) {
+                genreB.enqueue(songToMove);
+                popGnrTA.append("The song '" + songToMove + "' was moved to pop playlist!\n");
+            } else {
+                lkdSgTA.append("Invalid genre! Please enter 'rap' or 'pop'.\n");
+            }
+        }
+
+
+    }//GEN-LAST:event_moveBTNActionPerformed
+
+    private void dspBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dspBTNActionPerformed
+        // TODO add your handling code here:
+        //This will display the playlist in its TA
+        rapGnrTA.append("There are " + genreA.size() + " songs in playlist\n");
+        popGnrTA.append("There are " + genreB.size() + " songs in playlist\n");
+
+        String songsInfo = songs.displayStack();
+
+// Append the string to the text area
+        lkdSgTA.append(songsInfo + "\n");
+
+    }//GEN-LAST:event_dspBTNActionPerformed
+
+    private void xitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xitBTNActionPerformed
+        // TODO add your handling code here:
+        //Closes system
+        System.exit(0);
+    }//GEN-LAST:event_xitBTNActionPerformed
+
+    private void searchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBTNActionPerformed
+        // TODO add your handling code here:     
+        
+
+    }//GEN-LAST:event_searchBTNActionPerformed
+
+    private void rpBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rpBTNActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_rpBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,7 +342,8 @@ public class LikedSongsGUI extends javax.swing.JFrame {
     private javax.swing.JButton moveBTN;
     private javax.swing.JTextArea popGnrTA;
     private javax.swing.JTextArea rapGnrTA;
+    private javax.swing.JButton rpBTN;
     private javax.swing.JButton searchBTN;
-    private javax.swing.JButton sffBTN;
+    private javax.swing.JButton xitBTN;
     // End of variables declaration//GEN-END:variables
 }
