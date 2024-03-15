@@ -283,13 +283,38 @@ public class LikedSongsGUI extends javax.swing.JFrame {
 
     private void searchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBTNActionPerformed
         // TODO add your handling code here:     
-        
+        songs.searchSong();
 
     }//GEN-LAST:event_searchBTNActionPerformed
 
     private void rpBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rpBTNActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here: FIX!!!!
+
+        lkdSgTA.append("Repeat the playlist\n");
+        int originalSize = songs.size();
+        int totalCount = originalSize * 2;
+        int count = 0;
+
+        var tempSongs = new java.util.ArrayList<String>();
+
+        while (count < totalCount) {
+            String song = (String) songs.pop();
+
+            lkdSgTA.append((count + 1) + ". " + song + "\n");
+
+
+            tempSongs.add(song);
+
+            if (count == originalSize - 1 || count == totalCount - 1) {
+                for (String tempSong : tempSongs) {
+                    songs.push(tempSong);
+                }
+                tempSongs.clear();
+            }
+            count++;
+        }
+
+
     }//GEN-LAST:event_rpBTNActionPerformed
 
     /**
@@ -346,4 +371,20 @@ public class LikedSongsGUI extends javax.swing.JFrame {
     private javax.swing.JButton searchBTN;
     private javax.swing.JButton xitBTN;
     // End of variables declaration//GEN-END:variables
+//This is to create the temp song for the repeat function
+    private static class ArrayList<T> {
+
+        public ArrayList() {
+        }
+//create by the lightbulb for the add function for tempSongs
+
+        private void add(String song) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+//create by the lightbulb for the clear function for tempSongs
+
+        private void clear() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    }
 }

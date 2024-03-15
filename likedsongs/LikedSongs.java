@@ -5,6 +5,7 @@
 package likedsongs;
 
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.*;
 
 public class LikedSongs implements LikedSongsIF2 {
     
-    public String name,genre;
+    public String name;
     
     
 
@@ -25,13 +26,7 @@ public class LikedSongs implements LikedSongsIF2 {
         this.name = name;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+    
     
     public ArrayList<String> songs;
 
@@ -99,5 +94,23 @@ public class LikedSongs implements LikedSongsIF2 {
         }
         return sMessage;
     }
+    public void searchSong(){
+   if (songs.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Sorry, There are no songs to search.");
+        } else {
+            String searchTerm = JOptionPane.showInputDialog(null, "Please enter a song name to search:");
+            boolean found = false;
+            for (String song : songs) {
+                if (song.equalsIgnoreCase(searchTerm)) {
+                    JOptionPane.showMessageDialog(null, "Song '" + searchTerm + "' found!");
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                JOptionPane.showMessageDialog(null, "Song '" + searchTerm + "' not found.");
+            }
+        }
+   }
    
 }

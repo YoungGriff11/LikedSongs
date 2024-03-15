@@ -24,4 +24,6 @@ public interface LikedSongsIF2{
     public void emptyStack();
 
     public String displayStack();
+    
+    public void searchSong();
 }
